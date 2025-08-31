@@ -7,7 +7,6 @@ export default function EnterText() {
   const [importantTopics, setImportantTopics] = useState([]);
   const [examples, setExamples] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [videoUrl, setVideoUrl] = useState("");
 
   const backendURL = import.meta.env.VITE_BACKEND_URL;
 
@@ -29,7 +28,7 @@ export default function EnterText() {
         body: JSON.stringify({ text, level }),
       });
 
-      console.log(backendURL);
+
 
       const data = await res.json();
 
@@ -48,34 +47,10 @@ export default function EnterText() {
     }
   };
 
-  // Sample video sources (direct .mp4 links)
-  const videoSources = [
-    "https://www.w3schools.com/html/mov_bbb.mp4",                          // Big Buck Bunny short clip
-    "https://www.w3schools.com/html/movie.mp4",                            // Bear video (short)
-    "https://archive.org/download/ElephantsDream/ed_1024_512kb.mp4",       // Elephants Dream
-    "https://archive.org/download/Sintel/sintel-1024-surround.mp4",        // Sintel short film
-    "https://archive.org/download/Tears-of-Steel/TearsOfSteel_400p.mp4",   // Tears of Steel
-    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
-    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4",
-    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4",
-    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/VolkswagenGTIReview.mp4"
-  ];
+  
 
-  const handleGenerateVideo = () => {
-    // e.preventdefault();
-    setLoading(true);
-    if (!importantTopics.length) return alert("No topics available!");
-    setTimeout(() => {
-      // Call your actual video generate logic
-      console.log("Generating video...");
-      setLoading(false);
-      const randomVideo =
-        videoSources[Math.floor(Math.random() * videoSources.length)];
-      setVideoUrl(randomVideo);
-    }, 5000);
 
-  };
+
 
 
 
@@ -168,38 +143,9 @@ export default function EnterText() {
         </div>
       )}
 
-      {/* Generate Video Button */}
-      {importantTopics.length > 0 && (
-        <div className="mb-8 mt-4 flex justify-center">
-          <button
-            onClick={handleGenerateVideo}
-            disabled={loading}
-            className={`px-6 py-3 rounded-xl font-semibold tracking-wide shadow-md transition-transform ${loading
-              ? "bg-gray-500 cursor-not-allowed"
-              : "bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-400 hover:to-purple-500 text-white hover:scale-105"
-              }`}
-          >
-            {loading ? "⏳ Generating Video..." : "🎥 Generate Video"}
-          </button>
-        </div>
-
-      )}
-
-      {/* Video Player Section */}
-      {videoUrl && (
 
 
-        <div className="w-full max-w-3xl bg-white/5 border border-white/10 backdrop-blur-lg p-6 rounded-2xl shadow-lg mb-6">
-          <h2 className="text-2xl font-bold mb-4 text-red-400">
-            Recommended Video
-          </h2>
-          <video
-            controls
-            className="w-full rounded-xl shadow-lg"
-            src={videoUrl}
-          />
-        </div>
-      )}
+
 
 
     </div>
